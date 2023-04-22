@@ -1,0 +1,57 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0400
+header_name {.h}
+code_name {.cxx}
+class AppUI {open
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window {} {
+      label {CSub - Extract subtitles} open
+      xywh {476 180 314 266} type Double visible
+    } {
+      Fl_Check_Browser check_browser {
+        xywh {5 30 305 195}
+      }
+      Fl_Button button {
+        label {Extract Subtitle}
+        xywh {5 230 305 25}
+      }
+      Fl_Menu_Bar menu_bar {open
+        xywh {0 0 315 25}
+      } {
+        Submenu {} {
+          label File open
+          xywh {45 45 100 20}
+        } {
+          MenuItem {} {
+            label {Open Movie File}
+            xywh {50 50 100 20}
+          }
+          MenuItem {} {
+            label {Set Output Folder} selected
+            xywh {5 5 100 20}
+          }
+        }
+        Submenu {} {
+          label Tools open
+          xywh {0 0 100 20}
+        } {
+          MenuItem {} {
+            label {Traditional to simplified}
+            xywh {0 0 100 20}
+          }
+        }
+        Submenu {} {
+          label Help open
+          xywh {10 10 100 20}
+        } {
+          MenuItem {} {
+            label About
+            xywh {0 0 100 20}
+          }
+        }
+      }
+    }
+  }
+}
