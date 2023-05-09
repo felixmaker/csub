@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+fl2rust-macro = "0.5.13"
 fltk = "1.4.1"
 regex = "1.8.1"
 rust_iso639 = "0.0.3"
@@ -19,6 +20,3 @@ opt-level = "z"
 lto = true
 codegen-units = 1
 panic = "abort"
-
-[build-dependencies]
-fl2rust = "0.5.12"

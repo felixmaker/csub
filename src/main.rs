@@ -9,7 +9,10 @@ use fltk::{
 
 // mod csub_app;
 mod ffsub;
-mod ui;
+
+mod ui {
+    fl2rust_macro::include_ui!("src/ui.fl");
+}
 
 #[derive(Default)]
 struct FileCache {
@@ -20,7 +23,7 @@ struct FileCache {
 impl FileCache {
     fn request_input_file(&mut self) -> Option<PathBuf> {
         self.input_file = get_path_by_dialog(
-            "Set input movie",
+            "设置电影文件，目前支持 *.mkv 和 *.mp4",
             Some("*.{mkv,mp4}"),
             None,
             fltk::dialog::FileDialogType::BrowseFile,
@@ -50,7 +53,7 @@ impl FileCache {
 
     fn request_output_folder(&mut self) -> Option<PathBuf> {
         self.output_folder = get_path_by_dialog(
-            "Set output folder to save subtitle, the subtitle is the same as check browser named",
+            "选择一个「目录」用于保存提取的字幕，字幕的文件名就是勾选列表里的字幕名称。",
             None,
             self.get_input_file_folder().as_ref(),
             fltk::dialog::FileDialogType::BrowseDir,
@@ -91,10 +94,10 @@ fn main() {
         move |mb| {
             if let Some(choice) = mb.choice() {
                 match choice.as_str() {
-                    "Open Movie File" => sender.send(CSubMsg::SetInputFile),
-                    "Set Output Folder" => sender.send(CSubMsg::SetOutputFolder),
-                    "Traditional to simplified" => sender.send(CSubMsg::ToolTTS),
-                    "About" => sender.send(CSubMsg::ShowHelp),
+                    "打开电影文件" => sender.send(CSubMsg::SetInputFile),
+                    "设置输出文件夹" => sender.send(CSubMsg::SetOutputFolder),
+                    "繁体转简体" => sender.send(CSubMsg::ToolTTS),
+                    "关于" => sender.send(CSubMsg::ShowHelp),
                     _ => {}
                 }
             }
@@ -135,22 +138,22 @@ fn main() {
                 CSubMsg::ShowHelp => {
                     fltk::dialog::message_title("About");
                     fltk::dialog::message_default(
-                        r#"CSub is under GPLv3 License! You can use it to extract subtitles.
-It also provides a "Traditional to simplified" tool.
-You may see the GPLv3 License at https://www.gnu.org/licenses/gpl-3.0.html.
-You may access the code from https://github.com/felixmaker/csub
+                        r#"CSub 基于 GPLv3 开源协议授权，使用 FLTK 编写用户界面。
+你可以使用它查看并提取一个电影文件的字幕。它还内置了一个「繁体转简体」的小工具。
+你可以访问 https://www.gnu.org/licenses/gpl-3.0.html 来查看 GPLv3 开源协议。
+你可以访问 https://github.com/felixmaker/csub 来查看本项目的源码。
 "#,
                     );
                 }
                 CSubMsg::ToolTTS => {
                     let input = get_path_by_dialog(
-                        "Choose a traditional subtitle",
+                        "选择繁体字幕文件",
                         Some("*.{txt,srt,ass}"),
                         file_cache.get_input_file_folder().as_ref(),
                         fltk::dialog::FileDialogType::BrowseFile,
                     );
                     let output = get_path_by_dialog(
-                        "Choose a path to save simplified subtitle",
+                        "保存「简体」字幕",
                         Some("*.{txt,srt,ass}"),
                         file_cache.get_input_file_folder().as_ref(),
                         fltk::dialog::FileDialogType::BrowseSaveFile,
@@ -163,7 +166,7 @@ You may access the code from https://github.com/felixmaker/csub
                         }
                         _ => {
                             fltk::dialog::alert_default(
-                                "Failed to translate! You need to provide input and output!",
+                                "无法完成「繁体」转「简体」操作。你需要同时指定输入和输出字幕文件！",
                             );
                         }
                     }
@@ -173,7 +176,7 @@ You may access the code from https://github.com/felixmaker/csub
                 }
                 CSubMsg::OffWork => {
                     app_ui.button.activate();
-                    fltk::dialog::message_default("Extract Finished!");
+                    fltk::dialog::message_default("提取操作完成!");
                 }
             }
         }

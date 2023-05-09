@@ -7,47 +7,47 @@ class AppUI {open
   Function {make_window()} {open
   } {
     Fl_Window {} {
-      label {CSub - Extract subtitles} open
-      xywh {476 180 314 266} type Double visible
+      label {字幕提取器} open
+      xywh {509 174 314 266} type Double visible
     } {
       Fl_Check_Browser check_browser {
         xywh {5 30 305 195}
       }
       Fl_Button button {
-        label {Extract Subtitle}
+        label {执行提取操作}
         xywh {5 230 305 25}
       }
       Fl_Menu_Bar menu_bar {open
         xywh {0 0 315 25}
       } {
         Submenu {} {
-          label File open
+          label {文件} open
           xywh {45 45 100 20}
         } {
           MenuItem {} {
-            label {Open Movie File}
+            label {打开电影文件}
             xywh {50 50 100 20}
           }
           MenuItem {} {
-            label {Set Output Folder} selected
+            label {设置输出文件夹}
             xywh {5 5 100 20}
           }
         }
         Submenu {} {
-          label Tools open
+          label {小工具} open
           xywh {0 0 100 20}
         } {
           MenuItem {} {
-            label {Traditional to simplified}
+            label {繁体转简体}
             xywh {0 0 100 20}
           }
         }
         Submenu {} {
-          label Help open
+          label {帮助} open
           xywh {10 10 100 20}
         } {
           MenuItem {} {
-            label About
+            label {关于}
             xywh {0 0 100 20}
           }
         }

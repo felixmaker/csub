@@ -173,7 +173,7 @@ dependencies = [
 name = "csub"
 version = "0.1.0"
 dependencies = [
- "fl2rust",
+ "fl2rust-macro",
  "fltk",
  "regex",
  "rust_iso639",
@@ -304,10 +304,20 @@ dependencies = [
 
 [[package]]
 name = "fl2rust"
-version = "0.5.12"
+version = "0.5.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "088dbbd52b13112ec7652a9dac055daf9a2d59c9ea6063d785899eed9fde7f3b"
+checksum = "7f03b5fd0e65682906ddb53ffc8f0f1e759ef0ead9b931934188310dc4ca576b"
 dependencies = [
+ "fluid-parser",
+]
+
+[[package]]
+name = "fl2rust-macro"
+version = "0.5.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2481bdc8b6a381cc2ecc384c41d86ccdbb5885f82f3bc9803135831431863ecc"
+dependencies = [
+ "fl2rust",
  "fluid-parser",
 ]
 
